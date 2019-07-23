@@ -19,9 +19,10 @@ class TaskHubController @Autowired constructor(val repository: TaskHubRepository
     @PutMapping("/{id}")
     fun update(@PathVariable id: String, @RequestBody task: TaskHubEntity): ResponseEntity<TaskHubEntity> {
         val uuid = UUID.fromString(id)
-        if (!repository.existsById(uuid)) return ResponseEntity.notFound().build()
+        if (repository.existsById(uuid))
+            return ResponseEntity.ok(repository.save(TaskHubEntity(id = uuid, title = task.title, description = task.description, status = task.status)))
 
-        return ResponseEntity.ok(repository.save(TaskHubEntity(id = uuid, title = task.title, description = task.description, status = task.status)))
+        return ResponseEntity.notFound().build()
     }
 
     @GetMapping
@@ -31,8 +32,16 @@ class TaskHubController @Autowired constructor(val repository: TaskHubRepository
     @GetMapping("/{id}")
     fun retrieve(@PathVariable("id") id: String): ResponseEntity<TaskHubEntity> {
         val uuid = UUID.fromString(id)
-        if (!repository.existsById(uuid)) return ResponseEntity.notFound().build()
+        if (repository.existsById(uuid))
+            return ResponseEntity.ok(repository.findById(uuid).get())
 
-        return ResponseEntity.ok(repository.findById(uuid).get())
+        return ResponseEntity.notFound().build()
+    }
+
+    @DeleteMapping("{id}")
+    fun delete(@PathVariable("id") id: String) {
+        val uuid = UUID.fromString(id)
+        if (repository.existsById(uuid))
+            repository.deleteById(uuid)
     }
 }
