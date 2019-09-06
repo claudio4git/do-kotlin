@@ -1,4 +1,4 @@
-package br.com.jccf.explorer.jdbc
+package br.com.jccf.explorer.repository
 
 import br.com.jccf.explorer.mapper.BookRowMapper
 import br.com.jccf.explorer.model.Book
@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Component
 
 @Component
-class BookJdbc(
+class JdbcBook(
     private val jdbcTemplate: JdbcTemplate
 ) {
 

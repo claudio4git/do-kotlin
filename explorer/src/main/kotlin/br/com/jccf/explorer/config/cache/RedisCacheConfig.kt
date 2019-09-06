@@ -1,4 +1,4 @@
-package br.com.jccf.explorer.config
+package br.com.jccf.explorer.config.cache
 
 import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.Bean
@@ -9,7 +9,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory
 
 @Configuration
 @EnableCaching
-class CacheConfig {
+class RedisCacheConfig {
 
     @Bean
     fun redisConnectionFactory(): JedisConnectionFactory {

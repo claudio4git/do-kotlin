@@ -1,7 +1,7 @@
-package br.com.jccf.explorer.controller
+package br.com.jccf.explorer.controller.book
 
-import br.com.jccf.explorer.jdbc.BookJdbc
 import br.com.jccf.explorer.model.Book
+import br.com.jccf.explorer.repository.JdbcBook
 import org.springframework.cache.annotation.CacheConfig
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/book")
 @CacheConfig(cacheNames = ["books"])
 class BookController(
-    private val bookJdbc: BookJdbc
+    private val jdbcBook: JdbcBook
 ) {
 
     @PostMapping
     @CacheEvict(allEntries = true)
     fun insert(@RequestBody book: Book): ResponseEntity<Int> {
         return try {
-            ResponseEntity.ok(bookJdbc.insert(book))
+            ResponseEntity.ok(jdbcBook.insert(book))
         } catch (e: Exception) {
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(-1)
         }
@@ -32,7 +32,7 @@ class BookController(
     @CacheEvict(allEntries = true)
     fun update(@RequestBody book: Book): ResponseEntity<Int> {
         return try {
-            ResponseEntity.ok(bookJdbc.update(book))
+            ResponseEntity.ok(jdbcBook.update(book))
         } catch (e: Exception) {
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(-1)
         }
@@ -40,11 +40,11 @@ class BookController(
 
     @GetMapping("/{id}")
     fun getBook(@PathVariable("id") id: String): ResponseEntity<Book> {
-        val book = bookJdbc.findOne(id) ?: return ResponseEntity.notFound().build()
+        val book = jdbcBook.findOne(id) ?: return ResponseEntity.notFound().build()
         return ResponseEntity.ok(book)
     }
 
     @GetMapping
     @Cacheable
-    fun getAll(pageable: Pageable): Page<Book>? = bookJdbc.findAll(pageable)
+    fun getAll(pageable: Pageable): Page<Book>? = jdbcBook.findAll(pageable)
 }

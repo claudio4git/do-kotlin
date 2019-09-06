@@ -17,6 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <kotlin.version>1.2.71</kotlin.version>
+        <aws-cloud-version>2.1.2.RELEASE</aws-cloud-version>
     </properties>
 
     <dependencies>
@@ -89,6 +90,30 @@
             <artifactId>jedis</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.microutils</groupId>
+            <artifactId>kotlin-logging</artifactId>
+            <version>1.7.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-stdlib-common</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- aws -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-aws</artifactId>
+            <version>${aws-cloud-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-aws-messaging</artifactId>
+            <version>${aws-cloud-version}</version>
+        </dependency>
+
         <!-- tests -->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -129,6 +154,18 @@
         </dependency>
 
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-aws</artifactId>
+                <version>${aws-cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>

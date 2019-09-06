@@ -1,4 +1,4 @@
-package br.com.jccf.explorer.config
+package br.com.jccf.explorer.config.spring
 
 class SpringContext {
     companion object {
