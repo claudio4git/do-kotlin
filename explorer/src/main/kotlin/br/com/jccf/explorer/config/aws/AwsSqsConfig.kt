@@ -1,4 +1,4 @@
-package br.com.jccf.explorer.config.spring
+package br.com.jccf.explorer.config.aws
 
 import com.amazonaws.auth.EnvironmentVariableCredentialsProvider
 import com.amazonaws.client.builder.AwsClientBuilder
