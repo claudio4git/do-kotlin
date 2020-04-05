@@ -1,1 +1,2 @@
-# learn-kotlin
+# Project
+> Repository to Kotlin study
