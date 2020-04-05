@@ -18,3 +18,4 @@ rootProject.name = "quarkus-hexagon-mult-projects"
 
 include("project-application")
 include("project-core")
+include("project-infrastructure")

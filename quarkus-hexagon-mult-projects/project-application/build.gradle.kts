@@ -6,8 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen")
 }
 
-group = "com.jccf.application"
-version = "1.0-SNAPSHOT"
+group = "br.com.jccf.application"
 
 repositories {
     mavenCentral()
@@ -17,15 +16,25 @@ val quarkusPlatformGroupId: String by ext
 val quarkusPlatformArtifactId: String by ext
 val quarkusPlatformVersion: String by ext
 val postgresVersion: String by ext
+val springJdbcVersion: String by ext
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(project(":project-core"))
+    implementation(project(":project-infrastructure"))
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
+    implementation("io.quarkus:quarkus-config-yaml")
     implementation("io.quarkus:quarkus-kotlin")
     implementation("io.quarkus:quarkus-resteasy")
     implementation("io.quarkus:quarkus-resteasy-jsonb")
+    implementation("io.quarkus:quarkus-agroal")
+    implementation("io.quarkus:quarkus-jdbc-postgresql")
+    implementation("io.quarkus:quarkus-flyway")
+
+    implementation("org.springframework:spring-jdbc:$springJdbcVersion")
+
+    runtimeOnly("org.postgresql:postgresql:$postgresVersion")
 }
 
 tasks {
@@ -47,9 +56,4 @@ allOpen {
     annotation("javax.ws.rs.Path")
     annotation("javax.enterprise.context.ApplicationScoped")
     annotation("io.quarkus.test.junit.QuarkusTest")
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
 }

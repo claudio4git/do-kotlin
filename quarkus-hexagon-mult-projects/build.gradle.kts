@@ -3,8 +3,6 @@ plugins {
 }
 
 subprojects {
-
-    group = "com.jccf"
     version = "1.0-SNAPSHOT"
 
     repositories {
