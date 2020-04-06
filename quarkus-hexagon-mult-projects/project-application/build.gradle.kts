@@ -17,6 +17,7 @@ val quarkusPlatformArtifactId: String by ext
 val quarkusPlatformVersion: String by ext
 val postgresVersion: String by ext
 val springJdbcVersion: String by ext
+val loggingVersion: String by ext
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
@@ -25,6 +26,7 @@ dependencies {
 
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation("io.quarkus:quarkus-config-yaml")
+    implementation("io.quarkus:quarkus-vertx")
     implementation("io.quarkus:quarkus-kotlin")
     implementation("io.quarkus:quarkus-resteasy")
     implementation("io.quarkus:quarkus-resteasy-jsonb")
@@ -33,6 +35,7 @@ dependencies {
     implementation("io.quarkus:quarkus-flyway")
 
     implementation("org.springframework:spring-jdbc:$springJdbcVersion")
+    implementation("commons-logging:commons-logging:$loggingVersion")
 
     runtimeOnly("org.postgresql:postgresql:$postgresVersion")
 }
