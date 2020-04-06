@@ -9,7 +9,7 @@
 - PostgreSQL
 - Flyway
 
-# Sources to study
+# Study sources
 
 - https://jmgarridopaz.github.io/content/hexagonalarchitecture.html
 - https://herbertograca.com/2017/09/14/ports-adapters-architecture
