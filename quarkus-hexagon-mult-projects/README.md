@@ -17,7 +17,7 @@
 
 # Explanation
 
-Here is an image of the Hexagon architectural pattern.
+Here is an image of the *Hexagon* and *DDD* architectural.
 
 ![Hexagon architectural pattern](resources/hexagon.png)
 
@@ -30,3 +30,5 @@ and uses `project-infrastructure`
 
 - The module `project-infrastructure` is the *driven* that implements the ports from `project-core`
   > Here is all technologies to help like PostgreSQL
+
+- All packages are splitted by feature
