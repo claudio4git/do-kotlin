@@ -1,2 +1,1 @@
-# Project
-> Repository to Kotlin study
+> Kotlin study repository
